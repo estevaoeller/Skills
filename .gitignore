@@ -1,1 +1,8 @@
-project-memory-wiki-kit-v3.zip
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.DS_Store
+Thumbs.db
+*.log
+z.zips/

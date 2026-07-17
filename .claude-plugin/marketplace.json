@@ -1,0 +1,17 @@
+{
+  "name": "estevaoeller-skills",
+  "owner": {
+    "name": "Estevao Eller"
+  },
+  "description": "Marketplace pessoal de skills e plugins reutilizaveis para Claude Code.",
+  "plugins": [
+    {
+      "name": "project-memory",
+      "source": "./plugins/project-memory",
+      "description": "Memoria operacional progressiva para projetos, com nucleo minimo, wiki adaptativa e historico sob demanda.",
+      "category": "productivity",
+      "tags": ["memory", "documentation", "workflow", "project-management"],
+      "strict": true
+    }
+  ]
+}
