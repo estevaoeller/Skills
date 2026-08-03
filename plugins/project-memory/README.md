@@ -9,7 +9,7 @@ A skill `project-memory`, contendo:
 - protocolo de leitura minima;
 - estado atual em `NOW.md`;
 - tarefas em `TASKS.md`;
-- conhecimento duravel em `wiki/`;
+- conhecimento duravel em `.wiki/`;
 - historico consultado apenas quando necessario;
 - script de inicializacao;
 - modelos para Claude Code, Codex, Goose e outros agentes.
@@ -51,7 +51,7 @@ CLAUDE.md
 PROJECT.md
 NOW.md
 TASKS.md
-wiki/INDEX.md
+.wiki/INDEX.md
 history/README.md
 ```
 

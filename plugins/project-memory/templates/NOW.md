@@ -22,5 +22,5 @@ Atualizado por: inicialização
 
 ## Consulte quando necessário
 
-- Índice de conhecimento: `wiki/INDEX.md`
+- Índice de conhecimento: `.wiki/INDEX.md`
 - Histórico: `history/`

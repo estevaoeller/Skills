@@ -6,7 +6,7 @@ description: Mantém memória operacional portátil e progressiva em projetos, c
 
 # Project Memory
 
-Use esta skill quando o projeto adotar os arquivos `PROJECT.md`, `NOW.md`, `TASKS.md`, `wiki/INDEX.md` e `history/`.
+Use esta skill quando o projeto adotar os arquivos `PROJECT.md`, `NOW.md`, `TASKS.md`, `.wiki/INDEX.md` e `history/`.
 
 ## Objetivo
 
@@ -19,7 +19,7 @@ Preservar continuidade entre pessoas e agentes sem carregar todo o histórico no
 1. Leia `AGENTS.md`.
 2. Leia somente `PROJECT.md`, `NOW.md` e `TASKS.md`.
 3. Não faça varredura integral do projeto.
-4. Consulte `wiki/INDEX.md` e o histórico apenas quando a tarefa exigir.
+4. Consulte `.wiki/INDEX.md` e o histórico apenas quando a tarefa exigir.
 
 ### Durante o trabalho
 

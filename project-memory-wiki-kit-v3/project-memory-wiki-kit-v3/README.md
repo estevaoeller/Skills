@@ -19,7 +19,7 @@ AGENTS.md
 PROJECT.md
 NOW.md
 TASKS.md
-wiki/INDEX.md
+.wiki/INDEX.md
 history/
 ```
 

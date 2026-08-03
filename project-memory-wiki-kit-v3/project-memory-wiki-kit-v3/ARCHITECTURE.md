@@ -13,7 +13,7 @@ Lida no início da sessão:
 
 ### Conhecimento
 
-- `wiki/INDEX.md`: mapa do conhecimento;
+- `.wiki/INDEX.md`: mapa do conhecimento;
 - demais páginas: abertas somente quando pertinentes.
 
 ### Histórico
@@ -39,7 +39,7 @@ O agente deve:
 
 1. ler `PROJECT.md`, `NOW.md` e `TASKS.md`;
 2. identificar o que falta para a tarefa atual;
-3. consultar `wiki/INDEX.md` somente quando precisar de conhecimento adicional;
+3. consultar `.wiki/INDEX.md` somente quando precisar de conhecimento adicional;
 4. abrir apenas os arquivos pertinentes;
 5. pesquisar `history/` apenas para recuperar precedente, decisão, erro ou execução específica.
 

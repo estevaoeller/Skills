@@ -8,8 +8,8 @@ Antes de trabalhar, leia somente:
 2. `NOW.md`;
 3. `TASKS.md`.
 
-Não leia integralmente `wiki/`, `history/`, arquivos de dados ou outras pastas.
-Consulte `wiki/INDEX.md` somente quando a tarefa exigir conhecimento adicional.
+Não leia integralmente `.wiki/`, `history/`, arquivos de dados ou outras pastas.
+Consulte `.wiki/INDEX.md` somente quando a tarefa exigir conhecimento adicional.
 Pesquise o histórico apenas para localizar precedente, decisão, erro ou execução relevante.
 
 ## Execução
@@ -40,7 +40,7 @@ Após trabalho relevante:
 
 - atualize `NOW.md` com estado, bloqueios e próximos passos;
 - atualize as linhas afetadas de `TASKS.md`;
-- atualize `wiki/INDEX.md` se criar conhecimento durável;
+- atualize `.wiki/INDEX.md` se criar conhecimento durável;
 - crie registro curto em `history/` apenas quando houver valor de continuidade ou auditoria.
 
 Não registre conversas triviais nem replique conteúdo já preservado em outro lugar.
