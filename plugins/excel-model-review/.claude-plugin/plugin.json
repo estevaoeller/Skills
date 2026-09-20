@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "excel-model-review",
+  "displayName": "Excel Model Review",
+  "description": "Analisa mudancas estruturais e evolucao de modelos Excel por areas funcionais, preservando evidencia celular para auditoria.",
+  "author": {
+    "name": "Estevao Eller",
+    "url": "https://github.com/estevaoeller"
+  },
+  "homepage": "https://github.com/estevaoeller/Skills/tree/main/plugins/excel-model-review",
+  "repository": "https://github.com/estevaoeller/Skills",
+  "license": "MIT",
+  "keywords": ["excel", "model-review", "diff", "evolution", "audit"],
+  "skills": "./skills/"
+}
