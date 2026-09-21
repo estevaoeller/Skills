@@ -1,71 +1,134 @@
 ---
 name: excel-model-diff
-description: Compara duas versoes de um modelo Excel no nivel de areas funcionais. Mapeia estrutura e contexto antes de interpretar mudancas, procura titulos, rotulos, notas, comentarios, nomes definidos, tabelas e referencias entre abas, e separa evidencia explicita, referencia documental e inferencia. Use para detectar o que mudou entre dois .xlsx/.xlsm sem produzir um dump celula a celula.
+description: Compara duas versões de um modelo Excel no nível de áreas funcionais. Mapeia estrutura e contexto antes de interpretar mudanças, procura títulos, rótulos, notas, comentários, nomes definidos, tabelas e referências entre abas, e separa evidência explícita, referência documental e inferência. Use para detectar o que mudou entre dois .xlsx/.xlsm sem produzir um dump célula a célula.
 ---
 
 # Excel Model Diff
 
-Compare duas versoes Excel usando **areas funcionais como unidade principal de analise**. As celulas sao evidencia, nao o relatorio.
+Compare duas versões Excel usando **áreas funcionais como unidade principal de análise**. As células são evidência, não o relatório.
 
-## Regra epistemica
+## Esquema da análise
 
-**Nao ocultar o salto entre observacao e interpretacao.**
+```mermaid
+flowchart TD
+    A[Modelo anterior] --> C[Detectar diferenças]
+    B[Modelo revisado] --> C
+
+    C --> D[Alterações celulares]
+    D --> E[Agrupar alterações próximas]
+    E --> F[Área estrutural candidata]
+
+    F --> G[Buscar contexto no workbook]
+    G --> G1[Títulos e rótulos]
+    G --> G2[Notas e comentários]
+    G --> G3[Nomes definidos e tabelas]
+    G --> G4[Referências entre abas]
+
+    G1 --> H[Identificar área funcional]
+    G2 --> H
+    G3 --> H
+    G4 --> H
+
+    H --> I[Classificar a mudança]
+    I --> J[Relatório por área]
+
+    D -. evidência .-> J
+```
+
+O caminho desejado é:
+
+```text
+células alteradas
+      ↓
+área afetada
+      ↓
+nome/rótulo da área
+      ↓
+tipo de mudança
+      ↓
+interpretação e relevância
+```
+
+## Regra epistêmica
+
+**Não ocultar o salto entre observação e interpretação.**
+
+```mermaid
+flowchart LR
+    A[Observação] --> B{Há evidência textual<br/>ou estrutural suficiente?}
+    B -->|Nomeado no próprio bloco| C[Explícito]
+    B -->|Documentado em outra área| D[Referenciado]
+    B -->|Somente dedutível| E[Inferido]
+    B -->|Insuficiente| F[Não identificado]
+    E --> G[Base + confiança + confirmação]
+```
 
 Separe sempre:
-- **Explícito**: o proprio workbook nomeia ou descreve a area/mudanca.
-- **Referenciado**: outra parte do workbook identifica, documenta ou aponta para a area.
-- **Inferido**: significado ou finalidade deduzidos por estrutura, formulas, dependencias ou conteudo.
-- **Nao identificado**: evidencia insuficiente.
 
-Nome do bloco e interpretacao da mudanca podem ter status diferentes. Exemplo: o nome "Populacao Total" pode ser explicito, enquanto "internalizacao da serie antes estatica" e uma inferencia.
+- **Explícito**: o próprio workbook nomeia ou descreve a área/mudança.
+- **Referenciado**: outra parte do workbook identifica, documenta ou aponta para a área.
+- **Inferido**: significado ou finalidade deduzidos por estrutura, fórmulas, dependências ou conteúdo.
+- **Não identificado**: evidência insuficiente.
+
+Nome do bloco e interpretação da mudança podem ter status diferentes. Exemplo: o nome "População Total" pode ser explícito, enquanto "internalização da série antes estática" é uma inferência.
 
 ## Mapeamento antes do diff
 
-Antes de dar nome a uma area, procure contexto no workbook inteiro:
-1. titulos, subtitulos e cabecalhos;
-2. rotulos a esquerda/acima e textos auxiliares;
-3. celulas mescladas, negrito, bordas e mudancas visuais que marquem secoes;
-4. comentarios/notas de celula;
-5. nomes definidos e nomes de tabelas;
-6. abas de metodologia, memoria, premissas, instrucoes, notas ou "passo a passo";
-7. formulas e referencias que liguem o bloco a outras abas;
-8. textos explicativos pequenos, inclusive expressoes como ajuste, projecao, estimativa, fonte, premissa, calculado conforme, multiplica, divide, utilizado em, metodo e modelo.
+Antes de dar nome a uma área, procure contexto no workbook inteiro:
 
-Nao trate automaticamente rotulos de linha, municipios, anos ou categorias como titulo do bloco.
+1. títulos, subtítulos e cabeçalhos;
+2. rótulos à esquerda/acima e textos auxiliares;
+3. células mescladas, negrito, bordas e mudanças visuais que marquem seções;
+4. comentários/notas de célula;
+5. nomes definidos e nomes de tabelas;
+6. abas de metodologia, memória, premissas, instruções, notas ou "passo a passo";
+7. fórmulas e referências que liguem o bloco a outras abas;
+8. textos explicativos pequenos, inclusive expressões como ajuste, projeção, estimativa, fonte, premissa, calculado conforme, multiplica, divide, utilizado em, método e modelo.
+
+Não trate automaticamente rótulos de linha, municípios, anos ou categorias como título do bloco.
 
 ## Procedimento
 
 1. Identifique base/anterior e revisada/posterior.
-2. Verifique openpyxl>=3.1,<4.
+2. Verifique `openpyxl>=3.1,<4`.
 3. Execute o comparador estrutural.
-4. Leia primeiro summary.md e areas.csv.
-5. Para cada area material, busque evidencia semantica no workbook antes de aceitar o rotulo geometrico.
-6. Consulte evidence_cells.csv para validar a mudanca, nao para montar o relatorio principal.
-7. Registre a proveniencia do nome e da interpretacao.
-8. Crie pendencia quando a interpretacao exigir confirmacao humana.
-9. Nao modifique nem salve os arquivos de origem.
+4. Leia primeiro `summary.md` e `areas.csv`.
+5. Para cada área material, busque evidência semântica no workbook antes de aceitar o rótulo geométrico.
+6. Consulte `evidence_cells.csv` para validar a mudança, não para montar o relatório principal.
+7. Registre a proveniência do nome e da interpretação.
+8. Crie pendência quando a interpretação exigir confirmação humana.
+9. Não modifique nem salve os arquivos de origem.
 
 ## Comando
 
-~~~bash
+```bash
 python "$CLAUDE_PLUGIN_ROOT/scripts/compare_structural.py" "OLD.xlsx" "NEW.xlsx" --out "excel-model-diff-report"
-~~~
+```
 
 ## Formato de resposta
 
 Tabela principal:
-'Aba | Area | Identificacao | Status do nome | Mudanca | Status da interpretacao | Evidencia | Pendencia'.
 
-Depois explique apenas as areas relevantes.
+`Aba | Área | Identificação | Status do nome | Mudança | Status da interpretação | Evidência | Pendência`.
 
-Para inferencias, use:
-- **Inferencia**
-- **Base da inferencia**
-- **Confianca**: alta/media/baixa
-- **Confirmar**: pergunta ou verificacao necessaria
+Depois explique apenas as áreas relevantes.
 
-Nunca apresente uma inferencia como fato documentado.
+Para inferências, use:
 
-## Distincao
+- **Inferência**
+- **Base da inferência**
+- **Confiança**: alta/média/baixa
+- **Confirmar**: pergunta ou verificação necessária
 
-Responde **"o que mudou entre estas duas versoes?"**. Para historia de construcao ao longo de varias versoes, use excel-model-evolution.
+Nunca apresente uma inferência como fato documentado.
+
+## Distinção
+
+```mermaid
+flowchart LR
+    A[Versão A] --> C[excel-model-diff]
+    B[Versão B] --> C
+    C --> D["O que mudou?"]
+```
+
+Responde **"o que mudou entre estas duas versões?"**. Para história de construção ao longo de várias versões, use `excel-model-evolution`.
