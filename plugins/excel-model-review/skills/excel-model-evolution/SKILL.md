@@ -1,65 +1,69 @@
 ---
 name: excel-model-evolution
-description: Reconstrói como um modelo Excel financeiro, economico, operacional ou analitico foi construido e evoluiu ao longo de uma sequencia ordenada de versoes .xlsx/.xlsm. Use quando o usuario quiser uma linha do tempo da construcao, novos blocos funcionais, expansao/reducao de areas, evolucao de logica de calculo ou mudancas repetidas na mesma secao rotulada. A unidade principal e a area funcional, nao a celula individual.
+description: Reconstrói como um modelo Excel foi construido e evoluiu ao longo de versoes ordenadas. Usa areas funcionais e evidencia semantica do workbook, distinguindo fatos explicitos, referencias internas e inferencias. Use para mapear surgimento, expansao, reorganizacao e mudanca de logica de blocos entre varios .xlsx/.xlsm.
 ---
 
 # Excel Model Evolution
 
-Reconstrua **como o modelo se desenvolveu ao longo do tempo** a partir de uma sequencia ordenada de workbooks.
+Reconstrua **como o modelo chegou da versao inicial ao estado atual**. Nao e apenas um multi-diff.
 
-## Pergunta central
+## Regra epistemica
 
-Esta skill responde: **Como o modelo chegou da versao inicial ao estado atual?**
+**Nao ocultar o salto entre observacao e interpretacao.**
 
-Nao e apenas um multi-diff de celulas.
+Classifique afirmacoes relevantes como:
+- **Explícito**: documentado/nomeado no workbook.
+- **Referenciado**: explicado ou apontado por outra area/aba.
+- **Inferido**: deduzido por estrutura, formulas, dependencias ou sequencia das versoes.
+- **Nao identificado**: evidencia insuficiente.
+
+Uma fase de desenvolvimento como "refinamento metodologico" e inferencia, salvo se o proprio arquivo a documentar.
 
 ## Unidade de analise
 
-Use areas/blocos funcionais como Premissas Macroeconomicas, Demanda, Projecao de Economias, CAPEX/Cronograma de Investimentos, OPEX, Receita, Financiamento, Fluxo de Caixa, Indicadores e Sensibilidades.
+Use areas funcionais: premissas, demanda, projecoes, CAPEX, OPEX, receita, financiamento, fluxo, indicadores, sensibilidades e outros blocos efetivamente encontrados.
 
-Infira os nomes a partir de rotulos/cabecalhos proximos e mantenha aba + coordenadas como evidencia.
+Antes de nomear cada bloco, procure no workbook inteiro:
+- titulos/cabecalhos e rotulos;
+- notas, comentarios e textos auxiliares;
+- nomes definidos e tabelas;
+- abas metodologicas, memorias, instrucoes e passo a passo;
+- formulas/referencias entre abas;
+- textos pequenos que descrevam operacoes ou finalidade.
 
 ## Procedimento
 
-1. Estabeleca a ordem cronologica/logica das versoes.
-2. Verifique a dependencia com 'python -c "import openpyxl; print(openpyxl.__version__)"'.
-3. Se openpyxl nao estiver instalado, informe que a skill requer openpyxl>=3.1,<4 e instale apenas se o usuario autorizar a alteracao do ambiente.
-4. Compare cada par consecutivo pelo motor estrutural compartilhado.
-5. Converta as mudancas par a par em eventos de evolucao.
-6. Consolide eventos que aparentem referir-se a mesma area/rotulo.
-7. Construa uma linha do tempo mostrando quando uma area aparece, expande/contrai, altera a logica, troca formulas e hardcodes, recebe revisoes repetidas ou desaparece.
-8. Use mudancas celulares apenas como evidencia de suporte.
-9. Nao atribua intencao de projeto sem evidencia suficiente.
-10. Nao modifique os workbooks de origem.
+1. Estabeleca a ordem das versoes.
+2. Compare pares consecutivos pelo motor estrutural.
+3. Mapeie contexto semantico de cada versao, nao apenas celulas alteradas.
+4. Converta diffs em eventos: bloco criado, expandido, reduzido, removido, reorganizado, logica introduzida/alterada, dependencia criada/removida, hardcode introduzido/removido.
+5. Consolide eventos da mesma area usando rotulo + estrutura + proximidade + referencias, nao somente coordenadas.
+6. Separe observacao da interpretacao.
+7. Para inferencias, registre base, confianca e ponto a confirmar.
+8. Nao atribua intencao de projeto sem evidencia.
+9. Nao modifique os workbooks.
 
 ## Comando
 
-Forneca os arquivos do mais antigo para o mais novo:
-
 ~~~bash
-python "$CLAUDE_PLUGIN_ROOT/scripts/evolution.py" \
-  "modelo_v01.xlsx" \
-  "modelo_v02.xlsx" \
-  "modelo_v03.xlsx" \
-  "modelo_v04.xlsx" \
-  --out "excel-model-evolution-report"
+python "$CLAUDE_PLUGIN_ROOT/scripts/evolution.py" "v01.xlsx" "v02.xlsx" "v03.xlsx" "v04.xlsx" --out "excel-model-evolution-report"
 ~~~
-
-## Saidas
-
-- evolution.md: linha do tempo legivel por area funcional;
-- evolution.json: evidencia par a par e threads consolidadas.
 
 ## Formato de resposta
 
-Comece com uma narrativa curta da construcao e depois organize por area.
+Comece pela linha do tempo estrutural e depois organize por area. Em cada evento relevante mostre:
+- versao/transicao;
+- area e intervalo;
+- evento observado;
+- fonte/status da identificacao;
+- interpretacao, se houver;
+- status da interpretacao;
+- evidencia;
+- confianca;
+- pendencia de validacao.
 
-Quando util, identifique fases interpretativas como estruturacao inicial, inclusao de premissas, construcao dos motores de calculo, integracao entre modulos, refinamento/calibracao e consolidacao do modelo.
-
-Deixe claro quando essas fases forem inferidas e nao explicitamente documentadas.
+Fases como estruturacao inicial, inclusao de premissas, construcao de motores, integracao, calibracao e consolidacao so devem ser usadas quando sustentadas; marque-as como inferidas quando forem interpretacao.
 
 ## Distincao
 
-Esta skill responde **"como o modelo foi construido/evoluiu entre versoes?"**.
-
-Para uma comparacao focada entre duas versoes, use 'excel-model-diff'.
+Responde **"como o modelo foi construido/evoluiu entre versoes?"**. Para duas versoes especificas, use excel-model-diff.
