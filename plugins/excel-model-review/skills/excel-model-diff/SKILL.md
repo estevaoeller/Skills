@@ -1,51 +1,49 @@
 ---
 name: excel-model-diff
-description: Compara duas versoes de um modelo Excel financeiro, economico, operacional ou analitico no nivel de areas/blocos estruturais, e nao celula a celula. Use quando o usuario quiser detectar o que mudou entre dois .xlsx/.xlsm, identificar secoes alteradas, inferir um rotulo humano proximo para cada area e distinguir mudancas de logica/hardcode de mudancas comuns de premissas. Mantem evidencia celular apenas para auditoria.
+description: Compara duas versoes de um modelo Excel no nivel de areas funcionais. Mapeia estrutura e contexto antes de interpretar mudancas, procura titulos, rotulos, notas, comentarios, nomes definidos, tabelas e referencias entre abas, e separa evidencia explicita, referencia documental e inferencia. Use para detectar o que mudou entre dois .xlsx/.xlsm sem produzir um dump celula a celula.
 ---
 
 # Excel Model Diff
 
-Compare duas versoes Excel usando **areas funcionais como unidade principal de analise**.
+Compare duas versoes Excel usando **areas funcionais como unidade principal de analise**. As celulas sao evidencia, nao o relatorio.
 
-## Principio central
+## Regra epistemica
 
-Nao apresente um dump celula a celula como resultado principal. As celulas sao evidencia para detectar, delimitar e explicar blocos alterados.
+**Nao ocultar o salto entre observacao e interpretacao.**
 
-O relatorio principal deve responder:
+Separe sempre:
+- **Explícito**: o proprio workbook nomeia ou descreve a area/mudanca.
+- **Referenciado**: outra parte do workbook identifica, documenta ou aponta para a area.
+- **Inferido**: significado ou finalidade deduzidos por estrutura, formulas, dependencias ou conteudo.
+- **Nao identificado**: evidencia insuficiente.
 
-- qual area da planilha mudou;
-- o que essa area aparentemente representa;
-- onde ela esta localizada;
-- que tipo de mudanca estrutural ou de logica ocorreu;
-- quanta evidencia sustenta a conclusao;
-- se o rotulo ou a interpretacao precisam de validacao manual.
+Nome do bloco e interpretacao da mudanca podem ter status diferentes. Exemplo: o nome "Populacao Total" pode ser explicito, enquanto "internalizacao da serie antes estatica" e uma inferencia.
 
-## Inferencia de rotulo
+## Mapeamento antes do diff
 
-Para cada area alterada, infira um nome a partir do contexto do workbook. Priorize:
+Antes de dar nome a uma area, procure contexto no workbook inteiro:
+1. titulos, subtitulos e cabecalhos;
+2. rotulos a esquerda/acima e textos auxiliares;
+3. celulas mescladas, negrito, bordas e mudancas visuais que marquem secoes;
+4. comentarios/notas de celula;
+5. nomes definidos e nomes de tabelas;
+6. abas de metodologia, memoria, premissas, instrucoes, notas ou "passo a passo";
+7. formulas e referencias que liguem o bloco a outras abas;
+8. textos explicativos pequenos, inclusive expressoes como ajuste, projecao, estimativa, fonte, premissa, calculado conforme, multiplica, divide, utilizado em, metodo e modelo.
 
-1. rotulo textual imediatamente a esquerda;
-2. titulo/cabecalho imediatamente acima;
-3. titulo dentro da borda superior esquerda do bloco;
-4. titulo proximo em negrito ou celula mesclada;
-5. contexto textual proximo;
-6. coordenadas como fallback.
-
-Mantenha sempre aba e intervalo para rastreabilidade.
-
-Exemplo preferido: 'CAPEX!F22:M41 — Cronograma de Investimentos', em vez de uma lista de F22, G22, H22 etc.
+Nao trate automaticamente rotulos de linha, municipios, anos ou categorias como titulo do bloco.
 
 ## Procedimento
 
-1. Identifique qual arquivo e a versao base/anterior e qual e a revisada/posterior.
-2. Verifique a dependencia com 'python -c "import openpyxl; print(openpyxl.__version__)"'.
-3. Se openpyxl nao estiver instalado, informe que a skill requer openpyxl>=3.1,<4 e instale apenas se o usuario autorizar a alteracao do ambiente.
-4. Execute o comparador estrutural do plugin.
-5. Leia primeiro summary.md e areas.csv.
-6. Consulte evidence_cells.csv somente para investigar ou validar uma area.
-7. Reporte por area funcional, nao por celulas individuais.
-8. Marque explicitamente rotulos inferidos que parecam ambiguos.
-9. Nao modifique nem salve os arquivos Excel de origem.
+1. Identifique base/anterior e revisada/posterior.
+2. Verifique openpyxl>=3.1,<4.
+3. Execute o comparador estrutural.
+4. Leia primeiro summary.md e areas.csv.
+5. Para cada area material, busque evidencia semantica no workbook antes de aceitar o rotulo geometrico.
+6. Consulte evidence_cells.csv para validar a mudanca, nao para montar o relatorio principal.
+7. Registre a proveniencia do nome e da interpretacao.
+8. Crie pendencia quando a interpretacao exigir confirmacao humana.
+9. Nao modifique nem salve os arquivos de origem.
 
 ## Comando
 
@@ -53,27 +51,21 @@ Exemplo preferido: 'CAPEX!F22:M41 — Cronograma de Investimentos', em vez de um
 python "$CLAUDE_PLUGIN_ROOT/scripts/compare_structural.py" "OLD.xlsx" "NEW.xlsx" --out "excel-model-diff-report"
 ~~~
 
-Para ajustar o agrupamento:
-
-~~~bash
-python "$CLAUDE_PLUGIN_ROOT/scripts/compare_structural.py" "OLD.xlsx" "NEW.xlsx" --row-gap 3 --col-gap 3 --out "excel-model-diff-report"
-~~~
-
-## Saidas
-
-- summary.md: revisao principal por area;
-- areas.csv: uma linha por area estrutural alterada;
-- evidence_cells.csv: evidencia celular para auditoria/debug;
-- diff.json: resultado completo para processamento.
-
 ## Formato de resposta
 
-Prefira uma tabela: 'Aba | Area | Rotulo inferido | Tipo de mudanca | Evidencia | Observacao'.
+Tabela principal:
+'Aba | Area | Identificacao | Status do nome | Mudanca | Status da interpretacao | Evidencia | Pendencia'.
 
-Depois explique apenas as areas mais relevantes. Nao cole toda a evidencia celular salvo se o usuario pedir.
+Depois explique apenas as areas relevantes.
+
+Para inferencias, use:
+- **Inferencia**
+- **Base da inferencia**
+- **Confianca**: alta/media/baixa
+- **Confirmar**: pergunta ou verificacao necessaria
+
+Nunca apresente uma inferencia como fato documentado.
 
 ## Distincao
 
-Esta skill responde **"o que mudou entre estas duas versoes?"**.
-
-Se a tarefa for reconstruir como um modelo foi sendo construido ao longo de varias versoes, use 'excel-model-evolution'.
+Responde **"o que mudou entre estas duas versoes?"**. Para historia de construcao ao longo de varias versoes, use excel-model-evolution.
