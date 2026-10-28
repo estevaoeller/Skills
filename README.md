@@ -55,11 +55,9 @@ Cada entrada do catalogo aponta para um repositorio GitHub independente, que
 contem seu proprio `.claude-plugin/plugin.json` e suas fontes. Consulte
 [`docs/MIGRATION.md`](docs/MIGRATION.md) para os caminhos que foram separados.
 
-No workspace local, este catálogo ainda fica temporariamente em `01_Skills/` e será
-renomeado para `marketplace/` quando a sessão que o mantém aberto for encerrada. Os
-projetos de trabalho já ficam como pastas irmãs: `../project-memory/`,
-`../excel-model-review/` e `../homelab/`. O último usa o repositório privado
-`estevaoeller/skills-private`.
+No workspace local, este catálogo fica em `marketplace/`. Os projetos de
+trabalho ficam como pastas irmãs: `../project-memory/`, `../excel-model-review/`
+e `../homelab/`. O último usa o repositório privado `estevaoeller/skills-private`.
 
 ## Adicionar uma nova skill
 
