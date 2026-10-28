@@ -1,15 +1,15 @@
-# Agent Skills
+# Estevao Eller Skills Marketplace
 
-Repositorio pessoal de skills e plugins reutilizaveis para agentes de IA.
-
-O repositorio tambem esta estruturado como um marketplace independente para o Claude Code.
+Este repositorio e somente o catalogo de plugins reutilizaveis para Claude Code.
+As fontes de cada plugin vivem, sao testadas e sao versionadas em seus
+proprios repositorios.
 
 ## Marketplace do Claude Code
 
 Dentro do Claude Code, adicione o marketplace:
 
 ```text
-/plugin marketplace add estevaoeller/agent-skills
+/plugin marketplace add estevaoeller/agent-skills-marketplace
 ```
 
 Depois, instale a skill desejada:
@@ -21,7 +21,7 @@ Depois, instale a skill desejada:
 Pelo terminal, os comandos equivalentes sao:
 
 ```bash
-claude plugin marketplace add estevaoeller/agent-skills
+claude plugin marketplace add estevaoeller/agent-skills-marketplace
 claude plugin install project-memory@estevaoeller-skills
 ```
 
@@ -38,27 +38,33 @@ O Claude Code tambem pode seleciona-la automaticamente quando a descricao for pe
 | Plugin | Descricao | Status |
 |---|---|---|
 | `project-memory` | Memoria operacional progressiva para projetos | Inicial |
+| `excel-model-review` | Comparacao e evolucao estrutural de modelos Excel | Inicial |
+| `homelab` | Protocolo de manutencao e operacao do Homelab | Inicial |
 
 ## Estrutura
 
 ```text
 .claude-plugin/
-  marketplace.json
-plugins/
-  project-memory/
-    .claude-plugin/plugin.json
-    skills/project-memory/SKILL.md
-    scripts/
-    templates/
+  marketplace.json             <- indice de plugins externos
 docs/
 scripts/
+  check_marketplace.py          <- valida o indice
 ```
 
-Cada pasta em `plugins/` deve ser autocontida. Plugins instalados pelo marketplace sao copiados para o cache local do Claude Code e nao devem depender de arquivos fora da propria pasta.
+Cada entrada do catalogo aponta para um repositorio GitHub independente, que
+contem seu proprio `.claude-plugin/plugin.json` e suas fontes. Consulte
+[`docs/MIGRATION.md`](docs/MIGRATION.md) para os caminhos que foram separados.
+
+No workspace local, este catálogo ainda fica temporariamente em `01_Skills/` e será
+renomeado para `marketplace/` quando a sessão que o mantém aberto for encerrada. Os
+projetos de trabalho já ficam como pastas irmãs: `../project-memory/`,
+`../excel-model-review/` e `../homelab/`. O último usa o repositório privado
+`estevaoeller/skills-private`.
 
 ## Adicionar uma nova skill
 
-Consulte [`docs/ADDING-A-PLUGIN.md`](docs/ADDING-A-PLUGIN.md).
+Adicione uma entrada em `.claude-plugin/marketplace.json` que aponte para o
+repositorio GitHub do novo plugin.
 
 ## Validacao
 

@@ -66,8 +66,16 @@ def main() -> int:
             errors.append(f"Plugin duplicado: {plugin_name}")
         seen.add(plugin_name)
 
+        if isinstance(source, dict):
+            if source.get("source") != "github" or not isinstance(source.get("repo"), str):
+                errors.append(f"{label}.source GitHub deve conter source='github' e repo='owner/repo'.")
+                continue
+            if not re.fullmatch(r"[^/\s]+/[^/\s]+", source["repo"]):
+                errors.append(f"{label}.source.repo deve ter o formato 'owner/repo'.")
+            continue
+
         if not isinstance(source, str) or not source.startswith("./") or ".." in Path(source).parts:
-            errors.append(f"{label}.source deve ser um caminho relativo iniciado por './' e sem '..'.")
+            errors.append(f"{label}.source deve ser um caminho relativo iniciado por './' e sem '..', ou uma fonte GitHub.")
             continue
 
         plugin_root = root / source[2:]

@@ -3,7 +3,7 @@
 ## 1. Criar a pasta
 
 ```text
-plugins/nome-do-plugin/
+nome-do-plugin/
 ├── .claude-plugin/
 │   └── plugin.json
 ├── skills/
@@ -29,7 +29,7 @@ Exemplo minimo:
   "author": {
     "name": "Estevao Eller"
   },
-  "repository": "https://github.com/estevaoeller/agent-skills",
+  "repository": "https://github.com/estevaoeller/nome-do-plugin",
   "license": "MIT",
   "skills": "./skills/"
 }
@@ -42,7 +42,10 @@ Adicione uma entrada ao array `plugins` em `.claude-plugin/marketplace.json`:
 ```json
 {
   "name": "nome-do-plugin",
-  "source": "./plugins/nome-do-plugin",
+  "source": {
+    "source": "github",
+    "repo": "estevaoeller/nome-do-plugin"
+  },
   "description": "Descricao objetiva.",
   "category": "productivity",
   "tags": ["tag-1", "tag-2"],
@@ -54,7 +57,7 @@ Adicione uma entrada ao array `plugins` em `.claude-plugin/marketplace.json`:
 
 ```bash
 claude plugin validate .
-python scripts/check_marketplace.py
+# No marketplace, execute: python scripts/check_marketplace.py
 ```
 
 ## 5. Testar

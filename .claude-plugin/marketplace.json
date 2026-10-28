@@ -7,10 +7,35 @@
   "plugins": [
     {
       "name": "project-memory",
-      "source": "./plugins/project-memory",
+      "source": {
+        "source": "github",
+        "repo": "estevaoeller/project-memory"
+      },
       "description": "Memoria operacional progressiva para projetos, com nucleo minimo, wiki adaptativa e historico sob demanda.",
       "category": "productivity",
       "tags": ["memory", "documentation", "workflow", "project-management"],
+      "strict": true
+    },
+    {
+      "name": "excel-model-review",
+      "description": "Compara versoes e reconstrui a evolucao de modelos Excel por areas funcionais.",
+      "source": {
+        "source": "github",
+        "repo": "estevaoeller/excel-model-review"
+      },
+      "category": "productivity",
+      "tags": ["excel", "model-review", "audit", "diff"],
+      "strict": true
+    },
+    {
+      "name": "homelab",
+      "description": "Protocolo de manutencao, diagnostico e registro operacional para o Homelab.",
+      "source": {
+        "source": "github",
+        "repo": "estevaoeller/skills-private"
+      },
+      "category": "productivity",
+      "tags": ["homelab", "maintenance", "infrastructure", "operations"],
       "strict": true
     }
   ]

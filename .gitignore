@@ -6,3 +6,5 @@ __pycache__/
 Thumbs.db
 *.log
 z.zips/
+/project-memory/
+/excel-model-review/
