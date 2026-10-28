@@ -9,7 +9,7 @@ proprios repositorios.
 Dentro do Claude Code, adicione o marketplace:
 
 ```text
-/plugin marketplace add estevaoeller/agent-skills-marketplace
+/plugin marketplace add estevaoeller/Skills
 ```
 
 Depois, instale a skill desejada:
@@ -21,7 +21,7 @@ Depois, instale a skill desejada:
 Pelo terminal, os comandos equivalentes sao:
 
 ```bash
-claude plugin marketplace add estevaoeller/agent-skills-marketplace
+claude plugin marketplace add estevaoeller/Skills
 claude plugin install project-memory@estevaoeller-skills
 ```
 
