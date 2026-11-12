@@ -25,8 +25,7 @@ acesso a esse repositório privado.
 ## Atualização de 12/11/2026
 
 O `project-memory` voltou a ser distribuído dentro do catálogo, em `plugins/project-memory/`, somente na versão final. O
-repositório `estevaoeller/project-memory` passa a ser o repositório de trabalho dessa skill e deixa de ser a fonte da
-instalação. `excel-model-review` e `homelab` continuam como descrito acima.
+repositório de trabalho dessa skill, separado e privado, deixa de ser a fonte da instalação. `excel-model-review` e `homelab` continuam como descrito acima.
 
 ## Nota histórica
 

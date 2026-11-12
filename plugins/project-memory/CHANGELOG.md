@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.3.0 (12/11/2026)
+## 3.3 (12/11/2026)
 
 - a pasta de histórico passa de `history/` para `_history/`, como a `_wiki/` (o sublinhado mantém a pasta no topo da
   listagem). Quebra de compatibilidade: projetos criados por versão anterior precisam renomear a pasta (ver "Migração");
@@ -8,14 +8,18 @@
   versão vem do `version:` do `SKILL.md`, e o campo não muda quando a nota é editada;
 - o `init_project.py` lê a versão tanto no layout de skill solta quanto no de plugin.
 
-## 3.2.0 (versão interna, não publicada à parte)
+## 3.2
 
-- o modo de planejamento do Claude Code grava o plano em `_wiki/planos/` pela chave `plansDirectory` do
-  `.claude/settings.json`;
-- `init_project.py` grava essa chave sem apagar o que já existe no arquivo, e aceita `--plans-dir`;
-- ao aprovar um plano, ele é renomeado para `<assunto>.md`, entra no `_wiki/planos/INDEX.md` e ganha link no `TASKS.md`.
+Origem: pedido de Estevao Eller em 11/11/2026, para que os planos criados no modo de planejamento fiquem junto da memória do
+projeto.
 
-## Migração de versão anterior para a 3.3.0
+- `init_project.py` grava `"plansDirectory": "_wiki/planos"` no `.claude/settings.json` do projeto, preservando as demais chaves
+  e sem sobrescrever um valor já definido; a opção `--plans-dir` troca o caminho;
+- a seção "Planos" da skill explica o mecanismo: caminho relativo à pasta em que a sessão abre, ajuste quando a `_wiki/` fica
+  numa subpasta, renomear o plano de nome automático ao aprová-lo e o que fazer quando a chave não existe;
+- a linha "Plano aprovado" de `references/destinos.md` cita o `plansDirectory`.
+
+## Migração de versão anterior para a 3.3
 
 1. Renomear `history/` para `_history/` no projeto.
 2. Ajustar as menções à pasta em `AGENTS.md`, `PROJECT.md`, `NOW.md`, `TASKS.md` e `_wiki/INDEX.md`.
