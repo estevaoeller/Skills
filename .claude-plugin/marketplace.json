@@ -7,10 +7,7 @@
   "plugins": [
     {
       "name": "project-memory",
-      "source": {
-        "source": "github",
-        "repo": "estevaoeller/project-memory"
-      },
+      "source": "./plugins/project-memory",
       "description": "Memoria operacional progressiva para projetos, com nucleo minimo, wiki adaptativa e historico sob demanda.",
       "category": "productivity",
       "tags": ["memory", "documentation", "workflow", "project-management"],

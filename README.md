@@ -1,8 +1,10 @@
 # Estevao Eller Skills Marketplace
 
-Este repositorio e somente o catalogo de plugins reutilizaveis para Claude Code.
-As fontes de cada plugin vivem, sao testadas e sao versionadas em seus
-proprios repositorios.
+Este repositorio e o catalogo de plugins reutilizaveis para Claude Code. O plugin
+`project-memory` vive aqui, em `plugins/project-memory/`, somente na versao final,
+com README e changelog proprios. Os demais plugins apontam para repositorios proprios.
+O desenvolvimento do `project-memory` (memoria, wiki, historico e testes) acontece em
+outro repositorio, de trabalho, e nao faz parte deste.
 
 ## Marketplace do Claude Code
 
@@ -37,7 +39,7 @@ O Claude Code tambem pode seleciona-la automaticamente quando a descricao for pe
 
 | Plugin | Descricao | Status |
 |---|---|---|
-| `project-memory` | Memoria operacional progressiva para projetos | Inicial |
+| `project-memory` | Memoria operacional progressiva para projetos (3.3.0, [changelog](plugins/project-memory/CHANGELOG.md)) | Inicial |
 | `excel-model-review` | Comparacao e evolucao estrutural de modelos Excel | Inicial |
 | `homelab` | Protocolo de manutencao e operacao do Homelab | Inicial |
 
@@ -45,19 +47,23 @@ O Claude Code tambem pode seleciona-la automaticamente quando a descricao for pe
 
 ```text
 .claude-plugin/
-  marketplace.json             <- indice de plugins externos
+  marketplace.json             <- indice de plugins
+plugins/
+  project-memory/              <- versao final, README e CHANGELOG do plugin
 docs/
 scripts/
   check_marketplace.py          <- valida o indice
 ```
 
-Cada entrada do catalogo aponta para um repositorio GitHub independente, que
-contem seu proprio `.claude-plugin/plugin.json` e suas fontes. Consulte
+A entrada do `project-memory` aponta para `./plugins/project-memory`. As demais
+entradas apontam para um repositorio GitHub independente, que contem seu proprio
+`.claude-plugin/plugin.json` e suas fontes. Consulte
 [`docs/MIGRATION.md`](docs/MIGRATION.md) para os caminhos que foram separados.
 
 No workspace local, este catálogo fica em `marketplace/`. Os projetos de
-trabalho ficam como pastas irmãs: `../project-memory/`, `../excel-model-review/`
-e `../homelab/`. O último usa o repositório privado `estevaoeller/skills-private`.
+trabalho de `excel-model-review` e `homelab` ficam como pastas irmãs:
+`../excel-model-review/` e `../homelab/`. O último usa o repositório privado
+`estevaoeller/skills-private`.
 
 ## Adicionar uma nova skill
 
