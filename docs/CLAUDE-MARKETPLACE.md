@@ -7,7 +7,7 @@ Este repositorio ja contem os dois manifestos necessarios:
 
 ## Nome do marketplace
 
-O repositorio se chama `agent-skills`, mas o identificador publico do marketplace e:
+O repositorio se chama `Skills` e o identificador publico do marketplace e:
 
 ```text
 estevaoeller-skills
@@ -30,14 +30,14 @@ git push origin main
 No Claude Code:
 
 ```text
-/plugin marketplace add estevaoeller/agent-skills
+/plugin marketplace add estevaoeller/Skills
 /plugin install project-memory@estevaoeller-skills
 ```
 
 Ou pelo terminal:
 
 ```bash
-claude plugin marketplace add estevaoeller/agent-skills
+claude plugin marketplace add estevaoeller/Skills
 claude plugin install project-memory@estevaoeller-skills
 ```
 
@@ -85,7 +85,7 @@ claude plugin install project-memory@estevaoeller-skills --scope user
 Instalacao registrada no projeto e compartilhada com colaboradores:
 
 ```bash
-claude plugin marketplace add estevaoeller/agent-skills --scope project
+claude plugin marketplace add estevaoeller/Skills --scope project
 claude plugin install project-memory@estevaoeller-skills --scope project
 ```
 
