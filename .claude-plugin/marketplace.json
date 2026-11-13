@@ -12,6 +12,14 @@
       "category": "productivity",
       "tags": ["memory", "documentation", "workflow", "project-management"],
       "strict": true
+    },
+    {
+      "name": "excel-model-review",
+      "source": "./plugins/excel-model-review",
+      "description": "Compara versoes e reconstrui a evolucao de modelos Excel por areas funcionais, com evidencia celular para auditoria.",
+      "category": "productivity",
+      "tags": ["excel", "model-review", "audit", "diff"],
+      "strict": true
     }
   ]
 }

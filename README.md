@@ -38,6 +38,7 @@ O Claude Code tambem pode seleciona-la automaticamente quando a descricao for pe
 | Plugin | Descricao | Status |
 |---|---|---|
 | `project-memory` | Memoria operacional progressiva para projetos (3.3.0, [changelog](plugins/project-memory/CHANGELOG.md)) | Inicial |
+| `excel-model-review` | Comparacao e evolucao estrutural de modelos Excel, em duas skills (`excel-model-diff` e `excel-model-evolution`) | Inicial |
 
 ## Estrutura
 
@@ -46,6 +47,7 @@ O Claude Code tambem pode seleciona-la automaticamente quando a descricao for pe
   marketplace.json             <- indice de plugins
 plugins/
   project-memory/              <- versao final, README e CHANGELOG do plugin
+  excel-model-review/          <- versao final, README e CHANGELOG do plugin
 docs/
 scripts/
   check_marketplace.py          <- valida o indice

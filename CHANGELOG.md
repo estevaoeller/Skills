@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- `excel-model-review` entra no catalogo (`plugins/excel-model-review/`), somente na versao final, com as skills `excel-model-diff` e `excel-model-evolution`. `project-memory` 3.3.1: o template deixa de incluir o `.goosehints`; a secao Goose sai do `docs/COMPATIBILITY.md`.
+
 - Catalogo passa a listar somente plugins promovidos para `plugins/<nome>/`. Saem `excel-model-review` e `homelab` (apontavam para
   repositorios privados). Documentos internos da separacao (`docs/superpowers/`, `MIGRATION.md`, `ADDING-A-PLUGIN.md`) saem do
   repositorio; README e CLAUDE-MARKETPLACE atualizados.
