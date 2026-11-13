@@ -18,7 +18,7 @@
       "description": "Compara versoes e reconstrui a evolucao de modelos Excel por areas funcionais.",
       "source": {
         "source": "github",
-        "repo": "estevaoeller/excel-model-review"
+        "repo": "estevaoeller/skills_excel-model-review"
       },
       "category": "productivity",
       "tags": ["excel", "model-review", "audit", "diff"],
