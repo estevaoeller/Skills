@@ -1,6 +1,6 @@
 ---
 name: project-memory
-version: 3.3.0
+version: 3.3.1
 description: Mantém memória operacional portátil e progressiva em projetos (PROJECT, NOW, TASKS, wiki, _history), com registro automático ao fim de cada passo, destino certo para cada tipo de informação e nada apagado.
 ---
 

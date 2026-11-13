@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.3.1 (12/11/2026)
+
+- o template deixa de incluir o `.goosehints` (pedido de Estevao Eller em 12/11/2026). Projetos novos não recebem mais o
+  arquivo; projetos já criados não são afetados e podem apagá-lo.
+
 ## 3.3 (12/11/2026)
 
 - a pasta de histórico passa de `history/` para `_history/`, como a `_wiki/` (o sublinhado mantém a pasta no topo da

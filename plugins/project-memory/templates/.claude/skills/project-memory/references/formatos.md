@@ -23,7 +23,7 @@ engagement: Código do contrato
 organization: Organização
 date_created: DD/MM/AAAA
 date_modified: DD/MM/AAAA
-project_memory: 3.3.0
+project_memory: 3.3.1
 related:
   - "[[outra-pagina]]"
   - "[[mais-uma]]"
