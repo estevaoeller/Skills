@@ -1,17 +1,33 @@
-# Changelog
+# Changelog do catálogo
 
-## Unreleased
+Mudanças no catálogo como um todo. As mudanças de cada plugin ficam no changelog dele, em `plugins/<nome>/CHANGELOG.md`.
 
-- `excel-model-review` entra no catalogo (`plugins/excel-model-review/`), somente na versao final, com as skills `excel-model-diff` e `excel-model-evolution`. `project-memory` 3.3.1: o template deixa de incluir o `.goosehints`; a secao Goose sai do `docs/COMPATIBILITY.md`.
+## Não publicado
 
-- Catalogo passa a listar somente plugins promovidos para `plugins/<nome>/`. Saem `excel-model-review` e `homelab` (apontavam para
-  repositorios privados). Documentos internos da separacao (`docs/superpowers/`, `MIGRATION.md`, `ADDING-A-PLUGIN.md`) saem do
-  repositorio; README e CLAUDE-MARKETPLACE atualizados.
+- README reescrito: tabela com versão, função e requisitos de cada plugin, uma seção por plugin e a relação entre eles.
+  README, CHANGELOG e `docs/COMPATIBILITY.md` passam a ter acentuação.
+- Sai o `CONTRIBUTING.md`: o procedimento de publicação não faz parte do repositório público.
+- `docs/` atualizados para os dois plugins.
 
-- `project-memory` 3.3.0 passa a ser distribuido dentro do catalogo (`plugins/project-memory/`), somente na versao final,
-  com README e CHANGELOG proprios. A entrada do `marketplace.json` deixa de apontar para um repositorio
-  externo; o repositorio de trabalho da skill e separado e privado.
+## 12/11/2026
 
-- Estrutura inicial do marketplace `estevaoeller-skills`.
-- Inclusao do plugin `project-memory`.
-- Documentacao para publicacao, instalacao, validacao e criacao de novos plugins.
+- `project-memory` 3.3.0 passa a ser distribuído dentro do catálogo (`plugins/project-memory/`), somente na versão final, com
+  README e changelog próprios. A entrada do `marketplace.json` deixa de apontar para um repositório externo.
+- O catálogo passa a listar somente plugins publicados em `plugins/<nome>/`. Saem as entradas que apontavam para repositórios
+  privados. Documentos internos da separação (`docs/superpowers/`, `MIGRATION.md`, `ADDING-A-PLUGIN.md`) saem do repositório.
+- `project-memory` 3.3.1: o template deixa de incluir o `.goosehints`; a seção do Goose sai do `docs/COMPATIBILITY.md`.
+- `excel-model-review` entra no catálogo (`plugins/excel-model-review/`), somente na versão final, com as skills
+  `excel-model-diff` e `excel-model-evolution`.
+
+## 27/10/2026
+
+- Os plugins passam a viver em repositórios próprios, e o catálogo apenas aponta para eles (revertido em 12/11/2026).
+
+## 20/09/2026
+
+- Inclusão do plugin `excel-model-review`.
+
+## 17/07/2026
+
+- Estrutura inicial do marketplace `estevaoeller-skills`, com o plugin `project-memory` e a documentação de publicação,
+  instalação e validação.

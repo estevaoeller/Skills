@@ -1,73 +1,74 @@
-# Estevao Eller Skills Marketplace
+# Skills de Estevão Eller
 
-Este repositorio e o catalogo de plugins reutilizaveis para Claude Code. Cada plugin vive aqui, em
-`plugins/<nome>/`, somente na versao final (funcional e limpa), com README e changelog proprios. O desenvolvimento
-(memoria, wiki, historico e testes) acontece em repositorios de trabalho privados e nao faz parte deste.
+Catálogo de plugins para o Claude Code. Cada plugin está em `plugins/<nome>/` na versão final, com README e changelog próprios.
 
-## Marketplace do Claude Code
+## Plugins disponíveis
 
-Dentro do Claude Code, adicione o marketplace:
+| Plugin | Versão | O que faz | Requisitos |
+|---|---|---|---|
+| [`project-memory`](plugins/project-memory/) | 3.3.1 | Mantém, em arquivos Markdown dentro do projeto, o estado atual, as pendências, as decisões e o conhecimento acumulado, para que qualquer sessão nova retome o trabalho lendo três arquivos | Python 3 para o script de inicialização (só biblioteca padrão) |
+| [`excel-model-review`](plugins/excel-model-review/) | experimental, sem número de versão | Compara versões de um modelo Excel e reconstrói como ele evoluiu, relatando por áreas funcionais em vez de célula a célula | Python 3 e `openpyxl` (`requirements.txt` do plugin) |
+
+### project-memory
+
+Uma skill (`project-memory`). Cria no projeto um núcleo de três arquivos (`PROJECT.md`, `NOW.md`, `TASKS.md`), uma wiki
+(`_wiki/`) e um histórico (`_history/`), e orienta o agente a registrar cada informação no seu lugar ao fim de cada passo
+relevante, sem esperar pedido. Funciona com o Claude Code e com agentes que leem `AGENTS.md`. Detalhes e migração entre versões
+no [README](plugins/project-memory/README.md) e no [changelog](plugins/project-memory/CHANGELOG.md) do plugin.
+
+### excel-model-review
+
+Duas skills complementares sobre o mesmo motor Python, que só lê os arquivos:
+
+- `excel-model-diff` responde "o que mudou entre a versão A e a versão B";
+- `excel-model-evolution` responde "como o modelo chegou da primeira versão à atual", ao longo de uma sequência ordenada de
+  versões.
+
+As duas mapeiam a estrutura e o contexto do workbook (títulos, rótulos, notas, nomes definidos, referências entre abas) antes de
+interpretar as mudanças, e separam o que é evidência explícita do que é inferência. As células alteradas ficam guardadas como
+evidência para auditoria. Detalhes no [README](plugins/excel-model-review/README.md) do plugin.
+
+### Relação entre os plugins
+
+Os dois plugins são independentes: instalar um não exige o outro, e nenhum lê arquivo do outro. A relação existe só dentro do
+`excel-model-review`, entre as suas duas skills.
+
+## Instalação
+
+No Claude Code:
 
 ```text
 /plugin marketplace add estevaoeller/Skills
-```
-
-Depois, instale a skill desejada:
-
-```text
 /plugin install project-memory@estevaoeller-skills
+/plugin install excel-model-review@estevaoeller-skills
 ```
 
-Pelo terminal, os comandos equivalentes sao:
+Pelo terminal:
 
 ```bash
 claude plugin marketplace add estevaoeller/Skills
 claude plugin install project-memory@estevaoeller-skills
+claude plugin install excel-model-review@estevaoeller-skills
 ```
 
-A skill instalada pode ser invocada explicitamente por:
+Instalado, o plugin pode ser chamado pelo nome da skill (por exemplo, `/project-memory:project-memory`), e o Claude Code também
+o seleciona sozinho quando a descrição da skill corresponde à tarefa. Para receber versões novas:
 
 ```text
-/project-memory:project-memory
+/plugin marketplace update estevaoeller-skills
+/plugin update <plugin>@estevaoeller-skills
 ```
 
-O Claude Code tambem pode seleciona-la automaticamente quando a descricao for pertinente a tarefa.
-
-## Catalogo
-
-| Plugin | Descricao | Status |
-|---|---|---|
-| `project-memory` | Memoria operacional progressiva para projetos (3.3.0, [changelog](plugins/project-memory/CHANGELOG.md)) | Inicial |
-| `excel-model-review` | Comparacao e evolucao estrutural de modelos Excel, em duas skills (`excel-model-diff` e `excel-model-evolution`) | Inicial |
-
-## Estrutura
+## Estrutura do repositório
 
 ```text
-.claude-plugin/
-  marketplace.json             <- indice de plugins
-plugins/
-  project-memory/              <- versao final, README e CHANGELOG do plugin
-  excel-model-review/          <- versao final, README e CHANGELOG do plugin
-docs/
-scripts/
-  check_marketplace.py          <- valida o indice
+.claude-plugin/marketplace.json   índice dos plugins do catálogo
+plugins/<nome>/                   um plugin, autocontido (skills, scripts, README, CHANGELOG)
+docs/                             publicação e compatibilidade
+scripts/check_marketplace.py      valida o índice
+CHANGELOG.md                      mudanças do catálogo (as de cada plugin ficam no changelog dele)
 ```
 
-Cada entrada do `marketplace.json` aponta para `./plugins/<nome>`. Plugins novos entram por promocao: a versao final e
-sanitizada e copiada para `plugins/<nome>/` e registrada no indice.
-
-## Adicionar uma nova skill
-
-Copie a versao final e sanitizada para `plugins/<nome>/`, registre-a em `.claude-plugin/marketplace.json` e acrescente a
-linha na tabela do catalogo. Depois valide (abaixo).
-
-
-
-```bash
-claude plugin validate .
-python scripts/check_marketplace.py
-```
-
-## Licenca
+## Licença
 
 MIT.

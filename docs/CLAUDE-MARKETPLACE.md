@@ -15,16 +15,6 @@ estevaoeller-skills
 
 O nome `agent-skills` nao deve ser usado como identificador do marketplace porque e reservado pelo Claude Code.
 
-## Publicar
-
-Depois de copiar estes arquivos para o repositorio:
-
-```bash
-git add .
-git commit -m "Add Claude Code marketplace and project-memory plugin"
-git push origin main
-```
-
 ## Instalar a partir do GitHub
 
 No Claude Code:
@@ -50,7 +40,7 @@ Apos publicar alteracoes:
 /plugin update project-memory@estevaoeller-skills
 ```
 
-Enquanto o campo `version` for omitido dos manifestos, cada novo commit Git pode ser tratado como uma nova versao. Quando o repositorio amadurecer, pode-se adotar versionamento semantico, lembrando de incrementar a versao a cada release.
+Os manifestos `plugin.json` nao trazem o campo `version`, de proposito: assim cada novo commit e tratado como versao nova e chega a quem atualizar. O `claude plugin validate` avisa a ausencia, mas nao bloqueia. Se o campo for adotado, sera preciso incrementa-lo a cada publicacao, ou a atualizacao nao chega.
 
 ## Validar antes de publicar
 
@@ -64,7 +54,7 @@ python scripts/check_marketplace.py
 ## Testar localmente
 
 ```bash
-claude plugin marketplace add /caminho/para/agent-skills
+claude plugin marketplace add /caminho/para/o/clone/deste/repositorio
 claude plugin install project-memory@estevaoeller-skills
 ```
 
