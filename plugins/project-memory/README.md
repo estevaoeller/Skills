@@ -1,6 +1,6 @@
 # Project Memory
 
-![versão](https://img.shields.io/badge/versão-3.3-2f6f9f) ![licença](https://img.shields.io/badge/licença-MIT-555) ![agentes](https://img.shields.io/badge/agentes-Claude%20Code%20%7C%20Codex%20%7C%20Goose-777)
+![versão](https://img.shields.io/badge/versão-3.3.1-2f6f9f) ![licença](https://img.shields.io/badge/licença-MIT-555) ![agentes](https://img.shields.io/badge/agentes-Claude%20Code%20%7C%20Codex-777)
 
 Memória operacional para projetos longos conduzidos por pessoas e agentes de IA. O projeto guarda, em arquivos Markdown, o
 estado atual, as pendências, as decisões e o conhecimento acumulado, de forma que qualquer sessão nova (de qualquer agente)
@@ -130,7 +130,7 @@ Para atualizar depois de uma versão nova: `/plugin marketplace update estevaoel
 
 ### Como skill global (outros agentes)
 
-Crie `~/.agents/skills/project-memory/` (Codex, Goose e outros) ou `~/.claude/skills/project-memory/` (Claude Code sem o
+Crie `~/.agents/skills/project-memory/` (Codex e outros agentes compatíveis com `AGENTS.md`) ou `~/.claude/skills/project-memory/` (Claude Code sem o
 plugin) com o conteúdo de `skills/project-memory/` (`SKILL.md` e `references/`) e, ao lado, as pastas `scripts/` e `templates/`
 deste plugin. O `SKILL.md` chama `scripts/init_project.py` a partir da pasta da skill.
 
